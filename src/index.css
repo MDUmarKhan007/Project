@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply bg-ink-950 text-slate-200 font-sans antialiased;
+  background-image: theme('backgroundImage.radial-fade');
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+::selection {
+  @apply bg-electric-500/40 text-white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-ink-950;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-ink-700 rounded-full border-2 border-ink-950;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-electric-700;
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-electric-500/30 bg-electric-500/10 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-electric-200;
+  }
+
+  .section-title {
+    @apply mt-5 font-display text-3xl font-semibold leading-tight tracking-tight text-white text-balance sm:text-4xl;
+  }
+
+  .section-lead {
+    @apply mt-4 max-w-2xl text-base leading-relaxed text-slate-400;
+  }
+
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl px-5 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-electric-500 to-grape-500 text-white shadow-glow hover:shadow-grape hover:-translate-y-0.5;
+  }
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-out;
+  }
+  .btn-primary:hover::before {
+    @apply translate-x-full;
+  }
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/5 text-slate-100 hover:border-electric-400/50 hover:bg-electric-500/10 hover:-translate-y-0.5;
+  }
+  .btn-outline {
+    @apply btn border border-electric-400/40 text-electric-200 hover:bg-electric-500/10 hover:-translate-y-0.5;
+  }
+
+  .card {
+    @apply rounded-2xl border border-white/10 bg-ink-850/70 backdrop-blur-sm transition-all duration-300;
+  }
+  .card-hover {
+    @apply hover:border-electric-400/40 hover:shadow-glow hover:-translate-y-1;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-white/10 bg-ink-900/80 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition-all duration-200 focus:border-electric-400/60 focus:outline-none focus:ring-2 focus:ring-electric-400/20;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-electric-300 via-electric-400 to-grape-400 bg-clip-text text-transparent;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-medium text-slate-300 transition-colors duration-200 hover:text-white after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-gradient-to-r after:from-electric-400 after:to-grape-400 after:transition-all after:duration-300 hover:after:w-full;
+  }
+
+  .chip {
+    @apply rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-slate-300;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .bg-grid {
+    background-image: theme('backgroundImage.grid-faint');
+    background-size: 48px 48px;
+  }
+  .mask-fade {
+    -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, black, transparent 75%);
+  }
+  .glow-ring {
+    box-shadow: 0 0 0 1px rgba(63, 131, 255, 0.2),
+      0 0 30px -5px rgba(63, 131, 255, 0.35);
+  }
+  .perspective {
+    perspective: 1000px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
